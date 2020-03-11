@@ -1,12 +1,12 @@
 const Migrations = artifacts.require('Migrations')
-const BearToken = artifacts.require('BearToken')
-const CubToken = artifacts.require('CubToken')
+const JVC = artifacts.require('JVC')
+const MGC = artifacts.require('MGC')
 const Exchange = artifacts.require('Exchange')
 
 module.exports = function(deployer) {
   deployer.deploy(Migrations)
   deployer
-    .deploy(BearToken)
-    .then(() => deployer.deploy(CubToken))
-    .then(() => deployer.deploy(Exchange, BearToken.address, CubToken.address, 1))
+    .deploy(JVC)
+    .then(() => deployer.deploy(MGC))
+    .then(() => deployer.deploy(Exchange, JVC.address, MGC.address, 1))
 }

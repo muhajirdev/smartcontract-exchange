@@ -7,17 +7,19 @@ import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 * @title BearToken is a basic ERC20 Token  
 */
 
-contract BearToken is StandardToken, Ownable {
+contract MGC is StandardToken, Ownable {
     uint256 public totalSupply;
     string public name;
     string public symbol;
     uint32 public decimals;
 
     /**  
- * @dev assign totalSupply to account creating this contract */
+ * @dev assign totalSupply to account creating this contract 
+ */
+
     constructor() public {
-        symbol = "BEAR";
-        name = "BearToken";
+        symbol = "CUB";
+        name = "CubToken";
         decimals = 5;
         totalSupply = 100000000000;
 

@@ -1,10 +1,10 @@
-const Bear = artifacts.require('BearToken')
-const Cub = artifacts.require('CubToken')
+const JVC = artifacts.require('JVC')
+const MGC = artifacts.require('MGC')
 const Exchange = artifacts.require('Exchange')
 
 contract('Exchange', async function(accounts) {
   it('admin can transfer mgc to exchange', async () => {
-    const mgc = await Cub.deployed()
+    const mgc = await MGC.deployed()
     const exchange = await Exchange.deployed()
 
     const admin = (await web3.eth.getAccounts())[0]
@@ -19,8 +19,8 @@ contract('Exchange', async function(accounts) {
   })
 
   it('user can transfer jvp to get mgc', async () => {
-    const jvc = await Bear.deployed()
-    const mgc = await Cub.deployed()
+    const jvc = await JVC.deployed()
+    const mgc = await MGC.deployed()
     const exchange = await Exchange.deployed(jvc.address, mgc.address, 1)
 
     const mgcinexchange = await exchange.MGCAddress()

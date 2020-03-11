@@ -64,7 +64,7 @@ contract Exchange {
             ERC20Interface(JVCAddress).transferFrom(
                 msg.sender,
                 this,
-                _numberOfTokens
+                multiply(_numberOfTokens, MGCPrice)
             ),
             "Fail to take JVC from user to exchange"
         );

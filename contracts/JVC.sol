@@ -16,8 +16,8 @@ contract JVC is StandardToken, Ownable {
     /**  
  * @dev assign totalSupply to account creating this contract */
     constructor() public {
-        symbol = "BEAR";
-        name = "BearToken";
+        symbol = "JVC";
+        name = "JVCToken";
         decimals = 5;
         totalSupply = 100000000000;
 

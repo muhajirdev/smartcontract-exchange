@@ -18,8 +18,8 @@ contract MGC is StandardToken, Ownable {
  */
 
     constructor() public {
-        symbol = "CUB";
-        name = "CubToken";
+        symbol = "MGC";
+        name = "MangoCoin";
         decimals = 5;
         totalSupply = 100000000000;
 

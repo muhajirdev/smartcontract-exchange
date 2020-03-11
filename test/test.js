@@ -25,15 +25,6 @@ contract('Exchange', async function(accounts) {
 
     const mgcinexchange = await exchange.MGCAddress()
     const jvcinexchange = await exchange.JVCAddress()
-    const price = await exchange.MGCPrice()
-    console.log(`
-        mgcinexchange : ${mgcinexchange}
-        jvcinexchange : ${jvcinexchange}
-        mgc.address : ${mgc.address},
-        jvc.address : ${jvc.address}
-        exchange.address : ${exchange.address} 
-        price:  ${price}
-    `)
 
     assert.equal(mgcinexchange, mgc.address)
     assert.equal(jvcinexchange, jvc.address)

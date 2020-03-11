@@ -3,12 +3,23 @@ const MGC = artifacts.require('MGC')
 const Exchange = artifacts.require('Exchange')
 
 contract('Exchange', async function(accounts) {
+  it('exchange deployed with correct JVC & MGC Address', async () => {
+    const jvc = await JVC.deployed()
+    const mgc = await MGC.deployed()
+    const exchange = await Exchange.deployed(jvc.address, mgc.address, 1)
+
+    const mgcinexchange = await exchange.MGCAddress()
+    const jvcinexchange = await exchange.JVCAddress()
+
+    assert.equal(mgcinexchange, mgc.address)
+    assert.equal(jvcinexchange, jvc.address)
+  })
+
   it('admin can transfer mgc to exchange', async () => {
     const mgc = await MGC.deployed()
     const exchange = await Exchange.deployed()
 
     const admin = (await web3.eth.getAccounts())[0]
-    const user = (await web3.eth.getAccounts())[1]
 
     await mgc.transfer(exchange.address, 1000)
     const admin_cub_balance = await mgc.balanceOf(admin)
@@ -22,12 +33,6 @@ contract('Exchange', async function(accounts) {
     const jvc = await JVC.deployed()
     const mgc = await MGC.deployed()
     const exchange = await Exchange.deployed(jvc.address, mgc.address, 1)
-
-    const mgcinexchange = await exchange.MGCAddress()
-    const jvcinexchange = await exchange.JVCAddress()
-
-    assert.equal(mgcinexchange, mgc.address)
-    assert.equal(jvcinexchange, jvc.address)
 
     const user = (await web3.eth.getAccounts())[1]
 
@@ -52,5 +57,27 @@ contract('Exchange', async function(accounts) {
 
     const user_mgc_balance_after_buying_MGC = await mgc.balanceOf(user)
     assert.equal(user_mgc_balance_after_buying_MGC, 2000)
+  })
+})
+
+contract('Exchange End Sale', async accounts => {
+  it('admin can end sale', async () => {
+    const exchange = await Exchange.deployed()
+    const mgc = await MGC.deployed()
+
+    const admin = (await web3.eth.getAccounts())[0]
+
+    // Check admin initial balance
+    const admin_balance = await mgc.balanceOf(admin)
+    assert.equal(admin_balance, 100000000000, 'initial balance is not correct')
+
+    // Transfer to exchange
+    await mgc.transfer(exchange.address, 1000, { from: admin })
+
+    await exchange.endSale({ from: admin })
+
+    // Check admin balance after endSale
+    const admin_balance_after_sale = await mgc.balanceOf(admin)
+    assert.equal(admin_balance_after_sale, 100000000000)
   })
 })

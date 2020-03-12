@@ -1,4 +1,7 @@
 {
+    "scripts": {
+        "test:ropsten": "NETWORK=ropsten truffle test ./test/ropsten_test.js --network ropsten"
+    },
     "dependencies": {
         "@truffle/hdwallet-provider": "^1.0.32",
         "babel-polyfill": "^6.26.0",

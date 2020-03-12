@@ -8,5 +8,5 @@ module.exports = function(deployer) {
   deployer
     .deploy(JVC)
     .then(() => deployer.deploy(MGC))
-    .then(() => deployer.deploy(Exchange, JVC.address, MGC.address, 1))
+    .then(() => deployer.deploy(Exchange, "0xaeA5E3D8Bf67D6d669f0317e74884cD2D87e6fC4", MGC.address, 1))
 }

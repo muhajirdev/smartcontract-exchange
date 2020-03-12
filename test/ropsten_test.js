@@ -53,17 +53,15 @@ contract('Exchange End Sale', async accounts => {
 
     const admin = (await web3.eth.getAccounts())[0]
 
-    // Check admin initial balance
-    const admin_balance = await mgc.balanceOf(admin)
-    assert.equal(admin_balance, 100000000000, 'initial balance is not correct')
-
-    // Transfer to exchange
+    const admin_initial_balance = await mgc.balanceOf(admin)
     await mgc.transfer(exchange.address, 1000, { from: admin })
+    const admin_balance_after_transfer = await mgc.balanceOf(admin)
+
+    assert.notEqual(admin_initial_balance.toNumber(), admin_balance_after_transfer.toNumber(), 'after transfer, admin balance was still the same')
 
     await exchange.endSale({ from: admin })
-
-    // Check admin balance after endSale
     const admin_balance_after_sale = await mgc.balanceOf(admin)
-    assert.equal(admin_balance_after_sale, 100000000000)
+
+    assert.equal(admin_balance_after_sale.toNumber(), admin_initial_balance.toNumber(), 'admin balance after end sale is not equal')
   })
 })

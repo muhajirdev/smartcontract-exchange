@@ -8,5 +8,5 @@ npm install
 ```bash
 truffle develop
 
-test
+test ./test/test.js
 ```

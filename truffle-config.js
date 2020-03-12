@@ -8,6 +8,9 @@ module.exports = {
       version: '^0.4.24'
     }
   },
+  mocha: {
+    enableTimeouts: false
+  },
   networks: {
     ropsten: {
       provider: () =>
